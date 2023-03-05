@@ -1,0 +1,16 @@
+# node
+node_modules
+yarn.lock
+
+# vscode
+settings.json
+.vscode
+
+# cache
+*.log*
+.nuxt
+.nitro
+.cache
+.output
+.env
+dist
