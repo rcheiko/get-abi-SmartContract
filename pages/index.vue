@@ -1,20 +1,38 @@
 <template>
     <div>
-        <h1 class="text-2xl font-semibold">Hello</h1>
-        <p>How are you</p>
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
-            Username
-        </label>
-        <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="text" name="address" v-model="address" placeholder="0x.....">
-        <button @click="validate()"
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="button">
-            Valider
-        </button>
-        <div v-if="balance">
-            <p>Balance: {{ balance }}</p>
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
+                Address for balance
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="text" name="address" v-model="addressBalance" placeholder="0x.....">
+            <button @click="getAccountBalance()"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="button">
+                Valider
+            </button>
+            <div v-if="balance">
+                <p>Balance: {{ balance }}</p>
+            </div>
+        </div>
+
+
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="abi">
+                Address for ABI
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="text" name="abi" v-model="addressAbi" placeholder="0x.....">
+            <button @click="getContractAbi()"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="button">
+                Valider
+            </button>
+            <div v-if="abi">
+                <p>Abi: {{ abi }}</p>
+            </div>
         </div>
     </div>
 </template>
@@ -25,18 +43,30 @@ definePageMeta({
     description: 'base.meta.home.description'
 });
 
-const address = ref('');
+const addressBalance = ref('');
 const balance = ref('');
+const addressAbi = ref('');
+const abi = ref('');
 
-const validate = async () => {
+const getAccountBalance = async () => {
     const { data } = await useFetch('/api/getAccountBalance', {
         method: 'GET',
-        params: { address: address.value },
+        params: { address: addressBalance.value },
         headers: { 'Content-Type': 'application/json' }
     });
     console.log(data.value);
     balance.value = data.value?.body.result;
     console.log(balance.value);
-    
+};
+
+const getContractAbi = async () => {
+    const { data } = await useFetch('/api/getContractAbi', {
+        method: 'GET',
+        params: { address: addressAbi.value },
+        headers: { 'Content-Type': 'application/json' }
+    });
+    console.log(data.value);
+    abi.value = data.value?.body.result;
+    console.log(abi.value);
 };
 </script>
