@@ -40,14 +40,3 @@ npm run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
-
-## MODULE INSTALLED
-
-- aos
-- tailwind
-- i18n
-- pinia
-- vueuse
-- icons
-- html-validator
-- preconfigured meta ...
