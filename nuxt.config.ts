@@ -19,6 +19,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // The private keys which are only available within server-side
     etherscanApiKey: process.env.NUXT_PUBLIC_ETHERSCAN_API_KEY,
+    bscscanApiKey: process.env.NUXT_PUBLIC_BSCSCAN_API_KEY,
     public: {},
     // Keys within public, will be also exposed to the client-side
   },
