@@ -20,6 +20,7 @@
         <select class="mt-6 mb-2" name="network" v-model="network">
                 <option value="eth">eth</option>
                 <option value="bnb">bnb</option>
+                <option value="bnbtestnet">bnb testnet</option>
             </select>
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="abi">
@@ -64,6 +65,9 @@ const getAccountBalance = async () => {
 };
 
 const getContractAbi = async () => {
+    console.log(network.value);
+    console.log(addressAbi.value);
+    
     const { data } = await useFetch('/api/getContractAbi', {
         method: 'GET',
         params: { address: addressAbi.value, network: network.value },
